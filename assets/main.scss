@@ -1,0 +1,41 @@
+@import '~vuetify/src/styles/styles.sass';
+
+h1,
+h2,
+h3,
+h4 {
+  margin-bottom: 10px;
+}
+
+h1 {
+  font-size: 42px;
+}
+
+h2 {
+  font-size: 36px;
+}
+
+h3 {
+  font-size: 30px;
+}
+
+h4 {
+  font-size: 26px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.v-input input {
+  padding: 10px !important;
+  max-height: 40px !important;
+}
+
+.v-text-field__slot label {
+  padding-left: 10px;
+}
+
+.section {
+  padding: 70px 20px !important;
+}

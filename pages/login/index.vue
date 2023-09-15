@@ -55,12 +55,18 @@ export default {
         const response = await this.$axios.post('/api/user/login', this.login)
         const token = response.data.token
         cookies.set('token', response.data.token, { sameSite: 'strict' })
+        this.$store.dispatch('setToken', response.data.token)
         if (token) {
           this.$toast.success('Logged in successfully')
           this.$router.push('/account')
         }
       } catch (err) {
-        this.$toast.error('Something went wrong. Please try again later.')
+        if (err.response?.status === 400) {
+          this.$toast.error('Invalid login or password.')
+        } else {
+          console.log(err)
+          this.$toast.error('Something went wrong. Please try again later.')
+        }
       }
     },
   },

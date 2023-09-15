@@ -1,4 +1,5 @@
 const User = require('../user/model/User')
+const collectionName = 'auth'
 
 // register
 exports.registerNewUser = async (req, res) => {
@@ -10,10 +11,13 @@ exports.registerNewUser = async (req, res) => {
         message: 'Email already in use',
       })
     }
-    const user = new User({
-      email: req.body.email,
-      password: req.body.password,
-    })
+    const user = new User(
+      {
+        email: req.body.email,
+        password: req.body.password,
+      },
+      collectionName
+    )
     const data = await user.save()
     const token = await user.generateAuthToken() // here it is calling the method that we created in the model
     res.status(201).json({ data, token })
@@ -27,7 +31,7 @@ exports.loginUser = async (req, res) => {
   try {
     const email = req.body.email
     const password = req.body.password
-    const user = await User.findByCredentials(email, password)
+    const user = await User.findByCredentials(email, password, collectionName)
     if (!user) {
       return res
         .status(401)

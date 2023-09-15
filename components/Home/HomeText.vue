@@ -23,7 +23,11 @@
           cols="6"
           align="center"
         >
-          <img :src="'@/assets/images/' + col.icon" alt="" width="120" /><br />
+          <img
+            :src="require('@/assets/images/' + col.icon)"
+            alt=""
+            width="120"
+          /><br />
           <h3>{{ col.title }}</h3>
           {{ col.content }}
         </v-col>

@@ -11,7 +11,9 @@
           </v-col>
           <v-col align="right">
             <v-btn text to="/find-dog-sibling">Find your dog siblings</v-btn>
-            <v-btn v-if="loggedIn" color="orange" to="/login">Logout</v-btn>
+            <v-btn v-if="loggedIn" color="orange" to="/account"
+              >My Account</v-btn
+            >
             <v-btn v-else color="orange" to="/login">Login</v-btn>
           </v-col>
         </v-row>
@@ -46,8 +48,9 @@ const store = useStore()
 const loggedIn = ref(false)
 
 watch(
-  () => store.getters.token,
+  () => store.getters.getToken,
   (currentValue) => {
+    console.log('login')
     currentValue ? (loggedIn.value = true) : (loggedIn.value = false)
   }
 )

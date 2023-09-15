@@ -4,6 +4,12 @@ export const state = () => ({
   token: null,
 })
 
+export const mutations = {
+  SET_TOKEN: (state, token) => {
+    state.token = token
+  },
+}
+
 export const actions = {
   nuxtServerInit({ commit }, { req }) {
     const cookies = new Cookies(req.headers.cookie)
@@ -11,15 +17,13 @@ export const actions = {
     commit('SET_TOKEN', token)
   },
 
-  setToken(token) {
+  setToken({ commit }, token) {
     commit('SET_TOKEN', token)
   },
 }
 
-export const mutations = {
-  SET_TOKEN: (state, token) => {
-    state.token = token
+export const getters = {
+  getToken(state) {
+    return state.token
   },
 }
-
-export const getters = {}

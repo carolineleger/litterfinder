@@ -1,24 +1,29 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const userSchema = mongoose.Schema({
-  email: {
-    type: String,
-    required: [true, 'Please include your email'],
-  },
-  password: {
-    type: String,
-    required: [true, 'Please include your password'],
-  },
-  tokens: [
-    {
-      token: {
-        type: String,
-        required: true,
-      },
+const userSchema = mongoose.Schema(
+  {
+    email: {
+      type: String,
+      required: [true, 'Please include your email'],
     },
-  ],
-})
+    password: {
+      type: String,
+      required: [true, 'Please include your password'],
+    },
+    tokens: [
+      {
+        token: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
+  },
+  {
+    collection: 'auth',
+  }
+)
 
 // this method will hash the password before saving the user model
 userSchema.pre('save', async function (next) {

@@ -22,7 +22,7 @@ app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-// Define your API routes here
+// Define API routes here
 const userRoutes = require('../api/user/routes/user') // Bring in your user routes
 app.use('/user', userRoutes)
 

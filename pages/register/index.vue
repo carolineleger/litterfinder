@@ -35,6 +35,9 @@
 </template>
 
 <script>
+import Cookies from 'universal-cookie'
+const cookies = new Cookies(null, { path: '/' })
+
 export default {
   data() {
     return {
@@ -55,7 +58,7 @@ export default {
         if (response.status === 201) {
           const token = response.data.token
           if (token) {
-            localStorage.setItem('jwt', token)
+            cookies.set('token', response.data.token, { sameSite: 'strict' })
             this.$router.push('/account')
             this.$toast.success('Registration was successful')
           } else {
@@ -71,6 +74,7 @@ export default {
             this.$toast.error(error.data.message)
           }
         } else {
+          console.log(err)
           this.$toast.error('An error occurred')
         }
       }

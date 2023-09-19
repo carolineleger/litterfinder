@@ -39,3 +39,24 @@ a {
 .section {
   padding: 70px 20px !important;
 }
+
+.flex {
+  display: flex;
+  gap: 10px;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.half {
+  width: 50%;
+}
+
+.full {
+  width: 100%;
+}
+
+.v-select__slot label {
+  left: 8px !important;
+}

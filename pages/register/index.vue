@@ -4,18 +4,27 @@
       <v-col cols="12" sm="8" md="6">
         <v-card elevation="3" class="pa-5">
           <h1 class="text-center">Register</h1>
-          <v-form @submit.prevent="registerUser">
-            <v-text-field
-              v-model="register.email"
-              label="Email"
-              required
-            ></v-text-field>
+          <v-form class="flex wrap" @submit.prevent="registerUser">
+            <div
+              v-for="item in registrationForm"
+              :key="item.label"
+              :class="item.col ? 'half' : 'full'"
+            >
+              <v-text-field
+                v-if="item.field === 'input'"
+                :label="item.label"
+                :placeholder="item.placeholder"
+                :required="item.required"
+                :type="item.type"
+              ></v-text-field>
 
-            <v-text-field
-              v-model="register.password"
-              label="Password"
-              type="password"
-            ></v-text-field>
+              <v-select
+                v-if="item.field === 'select'"
+                :label="item.label"
+                :items="item.items"
+                item-text="label"
+              ></v-select>
+            </div>
 
             <v-btn color="primary" block @click="registerUser"> Sign up </v-btn>
           </v-form>
@@ -36,6 +45,7 @@
 
 <script>
 import Cookies from 'universal-cookie'
+import { registrationForm } from '../../data/registration.js'
 const cookies = new Cookies(null, { path: '/' })
 
 export default {
@@ -45,6 +55,7 @@ export default {
         email: '',
         password: '',
       },
+      registrationForm,
     }
   },
   methods: {
@@ -82,3 +93,15 @@ export default {
   },
 }
 </script>
+
+<style lang="scss" scoped>
+::v-deep {
+  .v-text-field {
+    padding-top: 0 !important;
+  }
+
+  .half {
+    width: calc(50% - 5px);
+  }
+}
+</style>

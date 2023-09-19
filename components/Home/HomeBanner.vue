@@ -4,7 +4,7 @@
       <div class="container">
         <h1>Connect with pups from the same litter</h1>
         <p>
-          Sign up for free to reunite your dog with their littermates.
+          Reunite your dog with their littermates.
           <br />Schedule playdates, share stories, and explore their family.
         </p>
 

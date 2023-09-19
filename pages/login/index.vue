@@ -64,7 +64,6 @@ export default {
         if (err.response?.status === 400) {
           this.$toast.error('Invalid login or password.')
         } else {
-          console.log(err)
           this.$toast.error('Something went wrong. Please try again later.')
         }
       }

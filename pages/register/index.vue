@@ -4,9 +4,13 @@
       <v-col cols="12" sm="8" md="6">
         <v-card elevation="3" class="pa-5">
           <h1 class="text-center">Register</h1>
-          <v-form class="flex wrap" @submit.prevent="registerUser">
+          <v-form
+            v-model="form"
+            class="flex wrap"
+            @submit.prevent="registerUser"
+          >
             <div
-              v-for="item in registrationForm"
+              v-for="item in registrationFormFields"
               :key="item.label"
               :class="item.col ? 'half' : 'full'"
             >
@@ -16,17 +20,27 @@
                 :placeholder="item.placeholder"
                 :required="item.required"
                 :type="item.type"
+                :model="register[item.model]"
+                :rules="item.rules"
               ></v-text-field>
+
+              <div v-if="item.field === 'date'">
+                <DateOfBirthPicker />
+              </div>
 
               <v-select
                 v-if="item.field === 'select'"
                 :label="item.label"
                 :items="item.items"
                 item-text="label"
+                :model="register[item.model]"
+                :required="item.required"
               ></v-select>
             </div>
 
-            <v-btn color="primary" block @click="registerUser"> Sign up </v-btn>
+            <v-btn color="primary" block type="submit" :disabled="!form">
+              Sign up
+            </v-btn>
           </v-form>
 
           <v-divider class="my-4"></v-divider>
@@ -46,16 +60,21 @@
 <script>
 import Cookies from 'universal-cookie'
 import { registrationForm } from '../../data/registration.js'
+import DateOfBirthPicker from '../../components/Registration/DateOfBirthPicker'
 const cookies = new Cookies(null, { path: '/' })
 
 export default {
+  components: {
+    DateOfBirthPicker,
+  },
   data() {
     return {
-      register: {
-        email: '',
-        password: '',
-      },
-      registrationForm,
+      register: {},
+      registrationFormFields: registrationForm,
+      datePickerMode: 'date',
+      datePickerDialog: false,
+      selectedDate: null,
+      form: false,
     }
   },
   methods: {
@@ -89,6 +108,13 @@ export default {
           this.$toast.error('An error occurred')
         }
       }
+    },
+    openDatePicker(mode) {
+      this.datePickerMode = mode
+      this.datePickerDialog = true
+    },
+    closeDatePicker() {
+      this.datePickerDialog = false
     },
   },
 }

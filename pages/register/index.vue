@@ -6,35 +6,33 @@
           <h1 class="text-center">Register</h1>
           <v-form
             v-model="form"
-            class="flex wrap"
+            class="d-flex flex-wrap gap-10"
             @submit.prevent="registerUser"
           >
             <div
               v-for="item in registrationFormFields"
               :key="item.label"
-              :class="item.col ? 'half' : 'full'"
+              :class="item.col ? 'half' : 'w-100'"
             >
               <v-text-field
                 v-if="item.field === 'input'"
+                v-model="register[item.model]"
                 :label="item.label"
                 :placeholder="item.placeholder"
-                :required="item.required"
                 :type="item.type"
-                :model="register[item.model]"
                 :rules="item.rules"
               ></v-text-field>
 
-              <div v-if="item.field === 'date'">
-                <DateOfBirthPicker />
-              </div>
+              <p v-if="item.hint" class="hint">
+                {{ item.hint }}
+              </p>
 
               <v-select
                 v-if="item.field === 'select'"
+                v-model="register[item.model]"
                 :label="item.label"
                 :items="item.items"
                 item-text="label"
-                :model="register[item.model]"
-                :required="item.required"
               ></v-select>
             </div>
 
@@ -60,16 +58,20 @@
 <script>
 import Cookies from 'universal-cookie'
 import { registrationForm } from '../../data/registration.js'
-import DateOfBirthPicker from '../../components/Registration/DateOfBirthPicker'
 const cookies = new Cookies(null, { path: '/' })
 
 export default {
-  components: {
-    DateOfBirthPicker,
-  },
   data() {
     return {
-      register: {},
+      register: {
+        email: '',
+        password: '',
+        passwordConfirm: '',
+        dateOfBirth: '',
+        dogBreed1: '',
+        dogBreed2: '',
+        breederName: '',
+      },
       registrationFormFields: registrationForm,
       datePickerMode: 'date',
       datePickerDialog: false,
@@ -79,6 +81,12 @@ export default {
   },
   methods: {
     async registerUser() {
+      console.log(this.register)
+      // Check if the passwords match
+      if (this.register.password !== this.register.passwordConfirm) {
+        this.$toast.error('Passwords do not match')
+        return
+      }
       try {
         const response = await this.$axios.post(
           '/api/user/register',

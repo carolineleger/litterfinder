@@ -1,5 +1,11 @@
+import {
+  confirmPasswordRules,
+  dogDOBRules,
+  emailRules,
+  passwordRules,
+  requiredRules,
+} from '../helpers/formRules'
 import { breeds } from './breeds'
-import { emailRules, passwordRules, requiredRules } from './formRules'
 
 export const registrationForm = [
   {
@@ -8,7 +14,6 @@ export const registrationForm = [
     label: 'Email*',
     model: 'email',
     placeholder: 'Enter your email',
-    required: true,
     rules: emailRules,
   },
   {
@@ -16,30 +21,39 @@ export const registrationForm = [
     type: 'password',
     label: 'Password*',
     model: 'password',
-    placeholder:
-      'Enter a password. It should be at least 8 characters long and contain at least one number and one letter',
-    required: true,
+    placeholder: 'Enter a password',
     rules: passwordRules,
+    hint: 'It should be at least 8 characters long and contain at least one number and one letter',
+    col: true,
+  },
+  {
+    field: 'input',
+    type: 'password',
+    label: 'Confirm Password*',
+    model: 'passwordConfirm',
+    placeholder: 'Confirm password',
+    col: true,
   },
   {
     field: 'input',
     label: 'Your dog name*',
     model: 'dogName',
-    required: true,
     placeholder: 'Enter your dog name',
     rules: requiredRules,
   },
   {
-    field: 'date',
+    label: 'Your dog date of birth',
+    field: 'input',
     model: 'dateOfBirth',
-    required: true,
+    hint: "Enter the full date or just the month if you don't know the exact day",
+    placeholder: 'Enter DD/MM/YYYY or just MM/YYYY',
+    rules: dogDOBRules,
   },
   {
     field: 'select',
     label: 'First dog breed',
     model: 'dogBreed1',
     items: breeds,
-    required: true,
     col: true,
   },
   {

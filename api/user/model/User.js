@@ -11,26 +11,26 @@ const userSchema = mongoose.Schema(
       type: String,
       required: [true, 'Please include your password'],
     },
-    dogName: {
-      type: String,
-      required: [true, 'Please include your dog name'],
-    },
-    dateOfBirth: {
-      type: String,
-      required: [true, 'Please include your dog dob'],
-    },
-    dogBreed1: {
-      type: String,
-      required: [true, 'Please include your dog breed'],
-    },
-    dogBreed2: {
-      type: String,
-      required: false,
-    },
-    breederName: {
-      type: String,
-      required: false,
-    },
+    dogs: [
+      {
+        dateOfBirth: {
+          type: String,
+          required: [true, 'Please include your dog dob'],
+        },
+        dogBreed1: {
+          type: String,
+          required: [true, 'Please include your dog breed'],
+        },
+        dogBreed2: {
+          type: String,
+          required: false,
+        },
+        breederName: {
+          type: String,
+          required: false,
+        },
+      },
+    ],
     tokens: [
       {
         token: {

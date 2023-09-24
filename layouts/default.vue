@@ -10,7 +10,7 @@
             </router-link>
           </v-col>
           <v-col align="right">
-            <v-btn text to="/find-dog-sibling">Find your dog siblings</v-btn>
+            <v-btn text to="/finder">Find your dog siblings</v-btn>
             <v-btn v-if="loggedIn" color="orange" to="/account"
               >My Account</v-btn
             >

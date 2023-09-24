@@ -15,11 +15,15 @@ exports.registerNewUser = async (req, res) => {
       {
         email: req.body.email,
         password: req.body.password,
-        dateOfBirth: req.body.dateOfBirth,
-        dogName: req.body.dogName,
-        dogBreed1: req.body.dogBreed1,
-        dogBreed2: req.body.dogBreed2,
-        breederName: req.body.breederName,
+        dogs: [
+          {
+            dateOfBirth: req.body.dogs[0].dateOfBirth,
+            dogName: req.body.dogs[0].dogName,
+            dogBreed1: req.body.dogs[0].dogBreed1,
+            dogBreed2: req.body.dogs[0].dogBreed2,
+            breederName: req.body.dogs[0].breederName,
+          },
+        ],
       },
       collectionName
     )

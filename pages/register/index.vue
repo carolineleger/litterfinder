@@ -81,16 +81,16 @@ export default {
   },
   methods: {
     async registerUser() {
-      console.log(this.register)
       // Check if the passwords match
       if (this.register.password !== this.register.passwordConfirm) {
         this.$toast.error('Passwords do not match')
         return
       }
+      const requestBody = this.setupRequestBody()
       try {
         const response = await this.$axios.post(
           '/api/user/register',
-          this.register
+          requestBody
         )
 
         if (response.status === 201) {
@@ -123,6 +123,26 @@ export default {
     },
     closeDatePicker() {
       this.datePickerDialog = false
+    },
+    setupRequestBody() {
+      const {
+        email,
+        password,
+        dogBreed1,
+        dogBreed2,
+        dateOfBirth,
+        dogName,
+        breederName,
+      } = this.register
+      const requestBody = {
+        email,
+        password,
+        dogs: [{ dateOfBirth, dogBreed1, dogBreed2, dogName }],
+        breederName,
+      }
+
+      console.log(requestBody)
+      return requestBody
     },
   },
 }

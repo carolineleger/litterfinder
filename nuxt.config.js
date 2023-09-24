@@ -56,6 +56,14 @@ export default {
       },
     },
   },
+  toast: {
+    position: 'top-center',
+    duration: 4000,
+    theme: 'toasted-primary',
+  },
+  jest: {
+    setupFiles: ['<rootDir>/jest.setup.js'],
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},

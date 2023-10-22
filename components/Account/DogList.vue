@@ -2,47 +2,6 @@
   <v-card>
     <v-card-title>Dog List</v-card-title>
     <v-card-text>
-      <!-- Display the list of dogs -->
-      <!-- Allow adding new dogs with fields for dateOfBirth, dogBreed1, dogBreed2, dogName, and dogPhoto -->
-    </v-card-text>
-  </v-card>
-</template>
-
-<script>
-export default {
-  props: {
-    dogs: {
-      type: Array,
-      default() {
-        return []
-      },
-    },
-  },
-  data() {
-    return {
-      newDog: {
-        // New dog details
-        dateOfBirth: '',
-        dogBreed1: '',
-        dogBreed2: '',
-        dogName: '',
-        dogPhoto: null,
-      },
-    }
-  },
-  methods: {
-    addNewDog() {
-      // Add the new dog to the list and clear the form
-    },
-    // Implement other dog-related actions here (e.g., editing, deleting)
-  },
-}
-</script>
-<template>
-  <v-card>
-    <v-card-title>Dog List</v-card-title>
-    <v-card-text>
-      <!-- Display the list of dogs -->
       <div v-for="(dog, index) in dogs" :key="index">
         <h3>Dog {{ index + 1 }}</h3>
         <p>Date of Birth: {{ dog.dateOfBirth }}</p>
@@ -55,7 +14,6 @@ export default {
         <hr />
       </div>
 
-      <!-- Allow adding new dogs -->
       <h3>Add New Dog</h3>
       <form @submit.prevent="addNewDog">
         <input v-model="newDog.dateOfBirth" placeholder="Date of Birth" />
@@ -77,13 +35,10 @@ export default {
   props: {
     dogs: {
       type: Array,
-      default() {
-        return []
-      },
+      default: () => [],
     },
   },
-  setup(props) {
-    // Reactive reference for new dog
+  setup(props, context) {
     const newDog = ref({
       dateOfBirth: '',
       dogBreed1: '',
@@ -92,20 +47,14 @@ export default {
       dogPhoto: null,
     })
 
-    // Function to add a new dog
     const addNewDog = () => {
-      // Validate and add the new dog to the list
-      if (
-        newDog.value.dateOfBirth &&
-        newDog.value.dogBreed1 &&
-        newDog.value.dogName
-      ) {
+      if (isFormValid(newDog.value)) {
         props.dogs.push({ ...newDog.value })
         clearForm()
+        context.emit('addDog', props.dogs)
       }
     }
 
-    // Function to clear the new dog form
     const clearForm = () => {
       newDog.value = {
         dateOfBirth: '',
@@ -116,14 +65,15 @@ export default {
       }
     }
 
-    // Function to handle file input change
     const handleFileChange = (event) => {
       const file = event.target.files[0]
       if (file) {
-        // You can handle the selected file (e.g., upload it to a server or store it)
-        // For now, we'll set it in the new dog object
         newDog.value.dogPhoto = URL.createObjectURL(file)
       }
+    }
+
+    const isFormValid = (dog) => {
+      return dog.dateOfBirth && dog.dogBreed1 && dog.dogName
     }
 
     // Implement other dog-related actions here (e.g., editing, deleting)

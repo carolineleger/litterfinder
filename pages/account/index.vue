@@ -2,7 +2,7 @@
   <div class="container">
     <h1>Account</h1>
     <UserDetails :user="user" @updateUser="updateUser"></UserDetails>
-    <DogList :dogs="dogs" @addDog="addDog"></DogList>
+    <!-- <DogList :dogs="dogs" @addDog="addDog"></DogList> -->
   </div>
 </template>
 
@@ -22,22 +22,13 @@ export default {
     }
   },
   methods: {
-    updateUser() {
-      // Implement user update logic here
+    updateUser(updatedUser) {
+      console.log('update user', updatedUser)
+      this.user = updatedUser
     },
-    addDog() {
-      // Implement adding a new dog logic here
+    addDog(dog) {
+      console.log(dog)
     },
   },
-}
-</script>
-
-<script setup>
-const { user, dogs } = defineProps(['user', 'dogs'])
-</script>
-
-<script>
-export default {
-  middleware: ['auth'],
 }
 </script>

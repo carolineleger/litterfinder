@@ -2,6 +2,7 @@ import Cookies from 'universal-cookie'
 
 export const state = () => ({
   token: null,
+  user: null,
 })
 
 export const mutations = {
@@ -19,6 +20,20 @@ export const actions = {
 
   setToken({ commit }, token) {
     commit('SET_TOKEN', token)
+  },
+
+  fetchUser({ commit, dispatch }, params) {
+    app.get('/api/litterfinder', async (req, res) => {
+      try {
+        // Use Mongoose models to interact with your MongoDB collections
+        const data = await auth.find() // Replace YourModel with your actual model name
+        console.log(data)
+        res.json(data)
+      } catch (error) {
+        console.error(error)
+        res.status(500).json({ error: 'Internal server error' })
+      }
+    })
   },
 }
 

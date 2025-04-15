@@ -1,34 +1,31 @@
 <template>
-  <div class="container">
-    <h1>Account</h1>
-    <UserDetails :user="user" @updateUser="updateUser"></UserDetails>
-    <!-- <DogList :dogs="dogs" @addDog="addDog"></DogList> -->
+  <div class="bg-gray-100 h-screen">
+    <div class="!p-12 layout">
+      <h1 class="text-center">Your Account</h1>
+      <UserDetails v-if="user" />
+      <br />
+      <DogList v-if="user" />
+    </div>
   </div>
+
 </template>
 
-<script>
+<script setup>
+import { ref, onMounted } from 'vue'
+import { useAuthStore } from "~/store/auth";
 import UserDetails from '@/components/Account/UserDetails.vue'
 import DogList from '@/components/Account/DogList.vue'
 
-export default {
-  components: {
-    UserDetails,
-    DogList,
-  },
-  data() {
-    return {
-      user: {},
-      dogs: [],
-    }
-  },
-  methods: {
-    updateUser(updatedUser) {
-      console.log('update user', updatedUser)
-      this.user = updatedUser
-    },
-    addDog(dog) {
-      console.log(dog)
-    },
-  },
-}
+const authStore = useAuthStore()
+const user = ref(null)
+
+onMounted(async () => {
+  await authStore.loadUser()
+
+  if (!authStore.isAuthenticated) {
+    router.push('/login')
+  } else {
+    user.value = authStore.user
+  }
+})
 </script>

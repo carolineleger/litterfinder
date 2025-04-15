@@ -1,0 +1,3 @@
+<template>
+    Dashboard test
+</template>

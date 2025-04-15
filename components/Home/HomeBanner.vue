@@ -1,6 +1,7 @@
 <template>
-  <div class="banner">
-    <div class="banner__content">
+  <div class="banner bg-cover bg-center w-full h-[60vh] relative">
+    <div
+      class="banner__content bg-black/50 w-full h-full flex justify-center items-center absolute text-white text-center">
       <div class="container">
         <h1>Connect with pups from the same litter</h1>
         <p>
@@ -8,7 +9,7 @@
           <br />Schedule playdates, share stories, and explore their family.
         </p>
 
-        <v-btn color="orange" size="large" to="/register">Join now</v-btn>
+        <v-btn size="large" to="/register" class="mt-4 primary-btn">Get started</v-btn>
       </div>
     </div>
   </div>
@@ -16,21 +17,6 @@
 
 <style lang="scss" scoped>
 .banner {
-  width: 100%;
-  height: 400px;
-  background: url('@/assets/images/two_dogs.webp') no-repeat center/cover;
-  position: relative;
-
-  &__content {
-    background-color: rgba(0, 0, 0, 0.5);
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    color: white;
-    text-align: center;
-  }
+  background: url('/public/images/two_dogs.webp') no-repeat center/cover;
 }
 </style>

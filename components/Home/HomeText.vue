@@ -1,35 +1,27 @@
 <template>
   <div>
-    <section class="intro">
+    <section class="intro m-auto bg-stone-100">
       <div class="section text-center">
         <h2>Are you a proud dog parent?</h2>
         <p>
-          At LitterConnect, we understand the unique bond that comes from
+          At LitterFinder, we understand the unique bond that comes from
           raising a pup from the same litter.
           <br />
           Our mission is to foster these special connections, helping you and
           your furry friend find their siblings and build lifelong
           relationships.
         </p>
+        <v-btn size="large" to="/register" class="mt-8 primary-btn">Find your dog siblings</v-btn>
       </div>
     </section>
 
     <v-container class="section">
       <h2 align="center">What We Do</h2>
       <v-row>
-        <v-col
-          v-for="col in presentation"
-          :key="col.icon"
-          cols="6"
-          align="center"
-        >
-          <img
-            :src="require('@/assets/images/' + col.icon)"
-            alt=""
-            width="120"
-          /><br />
+        <v-col v-for="col in presentation" :key="col.icon" cols="6" align="center" class="!p-6">
+          <img :src="getImageUrl(col.icon)" alt="" width="120" /><br />
           <h3>{{ col.title }}</h3>
-          {{ col.content }}
+          <div class="text-sm">{{ col.content }}</div>
         </v-col>
       </v-row>
     </v-container>
@@ -46,7 +38,7 @@ const presentation = [
   },
   {
     icon: 'list2.png',
-    title: 'Discover Siblings',
+    title: 'Share your story',
     content:
       "Share your dog's journey and learn about your littermates. Share stories, photos, and updates to keep the litter family connected, no matter where they are.",
   },
@@ -64,15 +56,3 @@ const presentation = [
   },
 ]
 </script>
-
-<style scoped lang="scss">
-.intro {
-  background-color: #222222;
-  color: white;
-}
-.section {
-  li {
-    margin-bottom: 5px;
-  }
-}
-</style>

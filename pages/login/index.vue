@@ -5,20 +5,20 @@
         <v-card elevation="3" class="pa-5">
           <h1 class="text-center">Login</h1>
           <v-form @submit.prevent="loginUser">
-            <v-text-field
-              v-model="login.email"
-              label="Email"
-              required
-            ></v-text-field>
+            <v-text-field v-model="login.email" label="Email" required :error-messages="errors.email"></v-text-field>
 
-            <v-text-field
-              v-model="login.password"
-              label="Password"
-              type="password"
-              required
-            ></v-text-field>
+            <v-text-field v-model="login.password" label="Password" type="password" required
+              :error-messages="errors.password"></v-text-field>
 
-            <v-btn color="primary" block @click="loginUser"> Sign in </v-btn>
+            <v-btn class="primary-btn" block type="submit" :loading="loading">
+              Sign in
+            </v-btn>
+
+            <v-alert v-if="errorMessage" type="error" class="mt-3">
+              {{ errorMessage }}
+            </v-alert>
+            <p class="mt-4 text-center text-sm"><a class="underline" href="/forgot-password">Forgot your password?</a>
+            </p>
           </v-form>
 
           <v-divider class="my-4"></v-divider>
@@ -26,7 +26,7 @@
           <div class="text-center">
             <p>
               Don't have an account?
-              <router-link to="/register">Click here</router-link>
+              <router-link to="/register" class="text-orange-600 underline">Get started</router-link>
             </p>
           </div>
         </v-card>
@@ -35,39 +35,66 @@
   </v-container>
 </template>
 
-<script>
-import Cookies from 'universal-cookie'
+<script setup>
+import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+import { useAuthStore } from '~/store/auth'
 
-const cookies = new Cookies(null, { path: '/' })
+const router = useRouter()
+const authStore = useAuthStore()
 
-export default {
-  data() {
-    return {
-      login: {
-        email: '',
-        password: '',
-      },
+const login = ref({ email: '', password: '' })
+const loading = ref(false)
+const errorMessage = ref('')
+const errors = ref({ email: '', password: '' })
+const { $supabase } = useNuxtApp()
+
+const loginUser = async () => {
+  loading.value = true;
+  errorMessage.value = '';
+  errors.value = { email: '', password: '' };
+
+  // Input validation
+  if (!login.value.email) {
+    errors.value.email = 'Email is required';
+  }
+
+  if (!login.value.password) {
+    errors.value.password = 'Password is required';
+  }
+
+  if (errors.value.email || errors.value.password) {
+    loading.value = false;
+    return;
+  }
+
+  try {
+    const { data, error } = await $supabase.auth.signInWithPassword({
+      email: login.value.email,
+      password: login.value.password,
+    });
+
+    if (error) {
+      throw new Error(error.message);
     }
-  },
-  methods: {
-    async loginUser() {
-      try {
-        const response = await this.$axios.post('/api/user/login', this.login)
-        const token = response.data.token
-        cookies.set('token', response.data.token, { sameSite: 'strict' })
-        this.$store.dispatch('setToken', response.data.token)
-        if (token) {
-          this.$toast.success('Logged in successfully')
-          this.$router.push('/account')
-        }
-      } catch (err) {
-        if (err.response?.status === 400) {
-          this.$toast.error('Invalid login or password.')
-        } else {
-          this.$toast.error('Something went wrong. Please try again later.')
-        }
-      }
-    },
-  },
-}
+
+    // Update user in store, including metadata (name)
+    authStore.setUser({
+      ...data.user,
+      name: data.user?.user_metadata?.name || '' 
+    });
+
+    // Redirect after successful login
+    router.push('/account');
+  } catch (err) {
+    errorMessage.value = err.message;
+    console.error("Error logging in:", err);
+  } finally {
+    loading.value = false;
+  }
+};
+
+onMounted(() => {
+  authStore.loadUser()
+})
 </script>

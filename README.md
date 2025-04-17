@@ -1,3 +1,8 @@
+## Project: LitterFinder
+
+- `/nuxt` – Frontend built with Nuxt 3
+- `/supabase` – Backend using Supabase Edge Functions
+
 # Nuxt Minimal Starter
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.

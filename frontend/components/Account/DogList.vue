@@ -1,11 +1,11 @@
 <template>
   <v-card class="mx-auto p-6">
     <v-row align="center" justify="space-between" class="px-4">
-      <v-col cols=" auto">
+      <v-col cols="auto">
         <v-card-title class="text-xl font-semibold">Your Dogs</v-card-title>
       </v-col>
       <v-col cols="auto">
-        <v-btn @click="toggleDogModal" class="primary-btn">
+        <v-btn @click="openAddDogModal" class="primary-btn">
           Add Dog
         </v-btn>
       </v-col>
@@ -14,7 +14,7 @@
     <v-card-text>
       <div v-if="loading">Loading...</div>
       <div v-else>
-        <div v-for="dog in dogs" :key="dog.id" class="mb-6 p-4 rounded-lg border border-gray-200 shadow-sm">
+        <div v-for="dog in dogs" :key="dog.id" class="mb-6 p-4 rounded-lg border border-gray-200 shadow-sm relative">
           <v-row no-gutters align="stretch">
             <v-col cols="auto" class="mr-4">
               <div class="h-full">
@@ -23,6 +23,9 @@
               </div>
             </v-col>
             <v-col>
+              <v-btn icon variant="text" class="!absolute top-2 right-2" @click="editDog(dog)">
+                <v-icon>mdi-pencil</v-icon>
+              </v-btn>
               <div class="py-2">
                 <h3 class="text-lg font-bold">{{ dog.name }}</h3>
                 <p class="text-sm text-gray-700">
@@ -39,6 +42,10 @@
                   <span class="font-semibold">Breeder:</span>
                   {{ dog.breeder_name }}
                 </p>
+                <p class="text-sm text-gray-700" v-if="dog.postcode || dog.state">
+                  <span class="font-semibold">Location:</span>
+                  {{ dog.postcode }} {{ dog.state }}
+                </p>
               </div>
             </v-col>
           </v-row>
@@ -46,10 +53,9 @@
       </div>
     </v-card-text>
 
-    <AddDogModal v-model="dogModalOpen" @fetch-dogs="fetchDogs" />
+    <AddDogModal v-model="dogModalOpen" :existing-dog="currentDog" @fetch-dogs="fetchDogs" />
   </v-card>
 </template>
-
 
 <script setup>
 import { ref, onMounted, computed } from 'vue';
@@ -63,6 +69,7 @@ const user = computed(() => userStore.user);
 const dogs = ref([]);
 const loading = ref(true);
 const dogModalOpen = ref(false);
+const currentDog = ref(null);
 
 const fetchDogs = async () => {
   if (!user.value) return;
@@ -87,8 +94,14 @@ const mapBreed = (value) => {
   return match ? match.label : value;
 };
 
-const toggleDogModal = () => {
-  dogModalOpen.value = !dogModalOpen.value;
+const openAddDogModal = () => {
+  currentDog.value = null;
+  dogModalOpen.value = true;
+};
+
+const editDog = (dog) => {
+  currentDog.value = dog;
+  dogModalOpen.value = true;
 };
 
 onMounted(fetchDogs);

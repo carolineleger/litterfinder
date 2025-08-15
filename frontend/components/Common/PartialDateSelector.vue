@@ -31,6 +31,23 @@ const year = ref('')
 
 const emit = defineEmits(['update'])
 
+const props = defineProps({
+    dateOfBirth: String
+})
+
+watch(
+    () => props.dateOfBirth,
+    (dob) => {
+        if (!dob) return
+
+        const [y, m = '', d = ''] = dob.split('-')
+        year.value = y ? +y : ''
+        month.value = m ? +m : ''
+        day.value = d ? +d : ''
+    },
+    { immediate: true }
+)
+
 watch([day, month, year], () => {
     emit('update', {
         day: day.value || null,

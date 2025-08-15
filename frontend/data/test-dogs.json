@@ -1,0 +1,222 @@
+[
+  {
+    "owner_id": "user_1",
+    "name": "Bella",
+    "date_of_birth": "2020-05-12",
+    "breed_primary": "Labrador Retriever",
+    "breed_secondary": "Golden Retriever",
+    "breeder_name": "Sunshine Kennels",
+    "postcode": "2000",
+    "state": "NSW",
+    "image_url": "https://example.com/bella.jpg"
+  },
+  {
+    "owner_id": "user_1",
+    "name": "Max",
+    "date_of_birth": "2019-11-03",
+    "breed_primary": "Labrador Retriever",
+    "breed_secondary": null,
+    "breeder_name": null,
+    "postcode": "2000",
+    "state": "NSW",
+    "image_url": null
+  },
+  {
+    "owner_id": "user_2",
+    "name": "Charlie",
+    "date_of_birth": "2021-02-14",
+    "breed_primary": "Beagle",
+    "breed_secondary": "Cocker Spaniel",
+    "breeder_name": "Hilltop Beagles",
+    "postcode": "3000",
+    "state": "VIC",
+    "image_url": "https://example.com/charlie.jpg"
+  },
+  {
+    "owner_id": "user_2",
+    "name": "Luna",
+    "date_of_birth": "2022-07-25",
+    "breed_primary": "German Shepherd",
+    "breed_secondary": null,
+    "breeder_name": "Elite Shepherds",
+    "postcode": "3000",
+    "state": "VIC",
+    "image_url": null
+  },
+  {
+    "owner_id": "user_3",
+    "name": "Lucy",
+    "date_of_birth": "2018-08-19",
+    "breed_primary": "Poodle",
+    "breed_secondary": "Shih Tzu",
+    "breeder_name": null,
+    "postcode": "4000",
+    "state": "QLD",
+    "image_url": "https://example.com/lucy.jpg"
+  },
+  {
+    "owner_id": "user_3",
+    "name": "Rocky",
+    "date_of_birth": "2020-01-05",
+    "breed_primary": "Border Collie",
+    "breed_secondary": null,
+    "breeder_name": "Outback Farms",
+    "postcode": "4000",
+    "state": "QLD",
+    "image_url": null
+  },
+  {
+    "owner_id": "user_4",
+    "name": "Molly",
+    "date_of_birth": "2021-10-11",
+    "breed_primary": "Labrador Retriever",
+    "breed_secondary": null,
+    "breeder_name": "Lakeside Labs",
+    "postcode": "5000",
+    "state": "SA",
+    "image_url": "https://example.com/molly.jpg"
+  },
+  {
+    "owner_id": "user_4",
+    "name": "Bailey",
+    "date_of_birth": "2019-06-30",
+    "breed_primary": "Cavoodle",
+    "breed_secondary": "Poodle",
+    "breeder_name": null,
+    "postcode": "5000",
+    "state": "SA",
+    "image_url": null
+  },
+  {
+    "owner_id": "user_5",
+    "name": "Cooper",
+    "date_of_birth": "2023-01-22",
+    "breed_primary": "Kelpie",
+    "breed_secondary": null,
+    "breeder_name": "Farm Dogs Co.",
+    "postcode": "6000",
+    "state": "WA",
+    "image_url": "https://example.com/cooper.jpg"
+  },
+  {
+    "owner_id": "user_5",
+    "name": "Daisy",
+    "date_of_birth": "2022-03-17",
+    "breed_primary": "Labrador Retriever",
+    "breed_secondary": null,
+    "breeder_name": null,
+    "postcode": "6000",
+    "state": "WA",
+    "image_url": null
+  },
+  {
+    "owner_id": "user_6",
+    "name": "Zoe",
+    "date_of_birth": "2020-09-09",
+    "breed_primary": "Beagle",
+    "breed_secondary": null,
+    "breeder_name": "Happy Beagles",
+    "postcode": "7000",
+    "state": "TAS",
+    "image_url": null
+  },
+  {
+    "owner_id": "user_6",
+    "name": "Toby",
+    "date_of_birth": "2017-12-02",
+    "breed_primary": "Bulldog",
+    "breed_secondary": "Boxer",
+    "breeder_name": null,
+    "postcode": "7000",
+    "state": "TAS",
+    "image_url": "https://example.com/toby.jpg"
+  },
+  {
+    "owner_id": "user_7",
+    "name": "Chloe",
+    "date_of_birth": "2019-04-08",
+    "breed_primary": "German Shepherd",
+    "breed_secondary": null,
+    "breeder_name": "Northern Breeds",
+    "postcode": "8000",
+    "state": "NT",
+    "image_url": null
+  },
+  {
+    "owner_id": "user_7",
+    "name": "Buddy",
+    "date_of_birth": "2021-08-15",
+    "breed_primary": "Poodle",
+    "breed_secondary": "Labrador Retriever",
+    "breeder_name": null,
+    "postcode": "8000",
+    "state": "NT",
+    "image_url": null
+  },
+  {
+    "owner_id": "user_8",
+    "name": "Maggie",
+    "date_of_birth": "2020-06-18",
+    "breed_primary": "Cavoodle",
+    "breed_secondary": null,
+    "breeder_name": "Doodle Dogs",
+    "postcode": "2000",
+    "state": "NSW",
+    "image_url": "https://example.com/maggie.jpg"
+  },
+  {
+    "owner_id": "user_8",
+    "name": "Oscar",
+    "date_of_birth": "2021-12-01",
+    "breed_primary": "Kelpie",
+    "breed_secondary": null,
+    "breeder_name": "Farm Dogs Co.",
+    "postcode": "3000",
+    "state": "VIC",
+    "image_url": null
+  },
+  {
+    "owner_id": "user_9",
+    "name": "Rosie",
+    "date_of_birth": "2019-03-28",
+    "breed_primary": "Golden Retriever",
+    "breed_secondary": "Labrador Retriever",
+    "breeder_name": null,
+    "postcode": "4000",
+    "state": "QLD",
+    "image_url": null
+  },
+  {
+    "owner_id": "user_9",
+    "name": "Harley",
+    "date_of_birth": "2023-04-20",
+    "breed_primary": "Beagle",
+    "breed_secondary": null,
+    "breeder_name": "Happy Beagles",
+    "postcode": "5000",
+    "state": "SA",
+    "image_url": "https://example.com/harley.jpg"
+  },
+  {
+    "owner_id": "user_10",
+    "name": "Ruby",
+    "date_of_birth": "2022-09-10",
+    "breed_primary": "Cavoodle",
+    "breed_secondary": null,
+    "breeder_name": "Doodle Dogs",
+    "postcode": "6000",
+    "state": "WA",
+    "image_url": null
+  },
+  {
+    "owner_id": "user_10",
+    "name": "Jake",
+    "date_of_birth": "2021-01-30",
+    "breed_primary": "Border Collie",
+    "breed_secondary": "Kelpie",
+    "breeder_name": "Outback Farms",
+    "postcode": "6000",
+    "state": "WA",
+    "image_url": "https://example.com/jake.jpg"
+  }
+]

@@ -2,7 +2,7 @@
   <v-app>
     <v-main>
       <Header />
-      <div class="page">
+      <div class="page h-full">
         <NuxtPage />
       </div>
       <Footer />
